@@ -1,0 +1,63 @@
+<html>
+
+  <head>
+    <title>eDNA Testing client</title>
+  </head>
+
+  <body>
+
+    <h2>eDNA Testing client</h2>
+    <input type="text" id="serverBaseAddressInput" value="http://localhost:62448" style="width: 300px">
+
+    <table>
+      <tr>
+        <td>
+          <label for="pnt">Point Ids</label>
+        </td>
+        <td>
+          <input type="text" id="pnt" style="width: 200px" value="WRLDC.PHASOR.WRDC0783">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="strtime">Start Time</label>
+        </td>
+        <td>
+          <input type="text" id="strtime" value="2017-02-04T00:00:00+05:30">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="endtime">End Time</label>
+        </td>
+        <td>
+          <input type="text" id="endtime" value="2017-02-04T01:00:00+05:30">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="secs">Period in seconds</label>
+        </td>
+        <td>
+          <input type="number" id="secs" value="60">
+        </td>
+      </tr>
+    </table>
+    <br>
+    <button id="fetchValuesButton" onclick="fetchHistorianData()">Fetch Values</button>
+    <button id="plotValuesButton" onclick="plotData()">Plot Data</button>
+
+    <h2 style="margin-left: 2%">Output</h2>
+
+    <div id="console" style="height: 300px; margin-right: 10%;margin-left: 2%; overflow: auto;border: 1px solid black"></div>
+    <button onclick="clearConsole()" id="clearConsoleButton" style="margin-left: 2%">ClearConsole</button>
+    <div id="plotDiv" style="width: 480px; height: 400px;">
+      <!-- Plotly chart will be drawn inside this DIV -->
+    </div>
+    <script src="./libs/js/jquery.min.js"></script>
+    <script src="./libs/js/plotly-latest.min.js"></script>
+    <script src="consoleFunctions.js"></script>
+    <script src="index.js"></script>
+  </body>
+
+</html>
