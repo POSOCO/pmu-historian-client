@@ -36,7 +36,16 @@ function fetchHistorianData(flag) {
           < /dat:DataRequest>\ < /soap:Body>\ < /soap:Envelope>';
   }
 
+  var OnSuccess = function(data) {
+    cacheData_ = data;
+    WriteLineConsole(JSON.stringify(data));
+  };
 
+  var OnError = function(jqXHR, textStatus, errorThrown) {
+    WriteLineConsole(JSON.stringify(jqXHR));
+    console.log(textStatus, errorThrown);
+  };
+  
   $.ajax({
     url: webServiceURL,
     type: "POST",
@@ -51,16 +60,6 @@ function fetchHistorianData(flag) {
     success: OnSuccess,
     error: OnError
   });
-
-  var OnSuccess = function(data) {
-    cacheData_ = data;
-    WriteLineConsole(JSON.stringify(data));
-  };
-
-  var OnError = function(jqXHR, textStatus, errorThrown) {
-    WriteLineConsole(JSON.stringify(jqXHR));
-    console.log(textStatus, errorThrown);
-  }
 }
 
 function plotData() {
