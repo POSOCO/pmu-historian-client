@@ -2,7 +2,10 @@ var cacheData_ = null;
 
 function fetchHistorianData() {
   // https://github.com/doedje/jquery.soap - JQUERY SOAP PLUGIN
-  var webServiceURL = "";
+  var webServiceURL = document.getElementById("serverBaseAddressInput").value;
+
+  var username_ = "perf1";
+  var password_ = "Abcd@1234";
 
   var cacheData_ = "";
 
@@ -25,7 +28,7 @@ function fetchHistorianData() {
     data: soapMessage,
     beforeSend: function(xhr) {
       /* Authorization header */
-      xhr.setRequestHeader("Authorization", "Basic " + btoa('perf1' + ":" + 'Abcd@1234'));
+      xhr.setRequestHeader("Authorization", "Basic " + btoa(username_ + ":" + password_));
     },
     processData: false,
     contentType: "text/xml; charset=\"utf-8\"",
