@@ -1,6 +1,6 @@
 var cacheData_ = null;
 
-function fetchHistorianData() {
+function fetchHistorianData(flag) {
   // https://github.com/doedje/jquery.soap - JQUERY SOAP PLUGIN
   var webServiceURL = document.getElementById("serverBaseAddressInput").value;
 
@@ -8,18 +8,34 @@ function fetchHistorianData() {
   var password_ = "Abcd@1234";
 
   var cacheData_ = "";
+  if (flag == 0) {
+    var soapMessage =
+      '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://www.eterra.com/public/services/data/dataTypes">\
+     <soap:Header/>\
+     <soap:Body>\
+        <dat:DiscoverServerRequest>?</dat:DiscoverServerRequest>\
+     </soap:Body>\
+  </soap:Envelope>';
+  } else if (flag == 1) {
+    var soapMessage =
+      '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:dat="http://www.eterra.com/public/services/data/dataTypes">\
+   <soap:Header/>\
+   <soap:Body>\
+      <dat:DataRequest>\
+         <measurementIDList>\
+            <!--Zero or more repetitions:-->\
+            <measurementId>525</measurementId>\
+          </measurementIDList>\
+         <timeRange>\
+            <startTime>2017-02-02T01:00:05.000+05:30</startTime>\
+            <endTime>2017-02-02T01:00:07.000+05:30</endTime>\
+         </timeRange>\
+         <!--Optional:-->\
+         <sampleRate>25</sampleRate>\
+         <!--Optional:-->\
+          < /dat:DataRequest>\ < /soap:Body>\ < /soap:Envelope>';
+  }
 
-  var soapMessage =
-    '<?xml version="1.0" encoding="utf-8"?> \
-<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" \
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema" \
-    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"> \
-  <soap:Body> \
-    <Hello xmlns="http://tempuri.org/"> \
-      <name>' + 'hgfhjh' + '</name> \
-    </Hello> \
-  </soap:Body> \
-</soap:Envelope>';
 
   $.ajax({
     url: webServiceURL,
